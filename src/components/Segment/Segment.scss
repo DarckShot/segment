@@ -1,0 +1,73 @@
+.segment {
+  display: flex;
+  align-items: center;
+  border: 1px solid #D4D4E8;
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: #FFFFFF;
+  position: relative;
+
+  &__background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    z-index: 1;
+
+    &--striped {
+      background-color: #B8B8D1;
+      background-image: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 4px,
+        rgba(255, 255, 255, 0.4) 4px,
+        rgba(255, 255, 255, 0.4) 8px
+      );
+    }
+  }
+
+  &__fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    z-index: 2;
+    transition: width 0.3s ease;
+
+    &--solid {
+      background-color: #B8B8D1;
+    }
+
+    &--striped {
+      background-color: #B8B8D1;
+      background-image: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 4px,
+        rgba(255, 255, 255, 0.4) 4px,
+        rgba(255, 255, 255, 0.4) 8px
+      );
+    }
+
+    &--empty {
+      background-color: transparent;
+    }
+
+    // Первый элемент имеет скругление слева
+    &:first-child {
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+
+    // Последний элемент имеет скругление справа
+    &:last-child {
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+  }
+
+  // Вариант для полностью пустого отрезка
+  &--empty {
+    background-color: #FFFFFF;
+  }
+}
