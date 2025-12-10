@@ -10,8 +10,8 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,css,scss,json,md}\"",
-    "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,css,scss,json,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,css,scss,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,css,scss,json,md}\""
   },
   "dependencies": {
     "react": "^19.2.0",

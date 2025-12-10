@@ -4,17 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e4b1f82-940f-4fe7-b3a9-7bd113c4fa5b" name="Changes" comment="minor: Доработки компонента &quot;Отрезок&quot;&#10;- Добавлен prettier&#10;- Добавлена базовая a11y&#10;- Изменена логика введения процентов (более масштабируема)">
-      <change afterPath="$PROJECT_DIR$/src/components/Segment/hooks/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Segment/hooks/useAriaAttributes.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Segment/hooks/useSegmentLayers.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Segment/types.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Segment/utils.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Segment/Segment.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Segment/Segment.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Segment/Segment.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Segment/Segment.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Segment/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Segment/index.ts" afterDir="false" />
+    <list default="true" id="0e4b1f82-940f-4fe7-b3a9-7bd113c4fa5b" name="Changes" comment="minor: Рефакторинг компонента &quot;Отрезок&quot;&#10;- Вынесена логика в хуки и утилиты&#10;- &quot;Почищен&quot; компонент &quot;Отрезок&quot;">
+      <change afterPath="$PROJECT_DIR$/CONTRIBUTING.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.prettierignore" beforeDir="false" afterPath="$PROJECT_DIR$/.prettierignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/A11Y.md" beforeDir="false" afterPath="$PROJECT_DIR$/A11Y.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +115,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765325089100</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="minor: Рефакторинг компонента &quot;Отрезок&quot;&#10;- Вынесена логика в хуки и утилиты&#10;- &quot;Почищен&quot; компонент &quot;Отрезок&quot;">
+      <option name="closed" value="true" />
+      <created>1765325762625</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1765325762625</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -139,6 +142,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="minor: Доработки компонента &quot;Отрезок&quot;&#10;- Добавлен prettier&#10;- Добавлена базовая a11y&#10;- Изменена логика введения процентов (более масштабируема)" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor: Доработки компонента &quot;Отрезок&quot;&#10;- Добавлен prettier&#10;- Добавлена базовая a11y&#10;- Изменена логика введения процентов (более масштабируема)" />
+    <MESSAGE value="minor: Рефакторинг компонента &quot;Отрезок&quot;&#10;- Вынесена логика в хуки и утилиты&#10;- &quot;Почищен&quot; компонент &quot;Отрезок&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor: Рефакторинг компонента &quot;Отрезок&quot;&#10;- Вынесена логика в хуки и утилиты&#10;- &quot;Почищен&quot; компонент &quot;Отрезок&quot;" />
   </component>
 </project>
