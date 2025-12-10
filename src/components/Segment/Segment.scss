@@ -1,7 +1,7 @@
 .segment {
   display: flex;
   align-items: center;
-  border: 1px solid #D5C9DF;
+  border: 1px solid #d5c9df;
   border-radius: 6px;
   overflow: hidden;
   background-color: #ffffff;
@@ -29,15 +29,15 @@
     transition: width 0.3s ease;
 
     &--solid {
-      background-color: #D5C9DF;
+      background-color: #d5c9df;
     }
 
     &--striped {
       background-color: white;
       background-image: repeating-linear-gradient(
         135deg,
-        #CDB9E0,
-        #CDB9E0 1px,
+        #cdb9e0,
+        #cdb9e0 1px,
         white 0,
         white 3px
       );

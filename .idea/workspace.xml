@@ -4,52 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e4b1f82-940f-4fe7-b3a9-7bd113c4fa5b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.prettierignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.prettierrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/A11Y.md" afterDir="false" />
+    <list default="true" id="0e4b1f82-940f-4fe7-b3a9-7bd113c4fa5b" name="Changes" comment="minor: Доработки компонента &quot;Отрезок&quot;&#10;- Добавлен prettier&#10;- Добавлена базовая a11y&#10;- Изменена логика введения процентов (более масштабируема)">
+      <change afterPath="$PROJECT_DIR$/src/components/Segment/hooks/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Segment/hooks/useAriaAttributes.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Segment/hooks/useSegmentLayers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Segment/types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Segment/utils.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eslint.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/eslint.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Segment/Segment.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Segment/Segment.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Segment/Segment.stories.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Segment/Segment.stories.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Segment/Segment.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Segment/Segment.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Segment/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Segment/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stories/Button.stories.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stories/Button.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stories/Configure.mdx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stories/Header.stories.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stories/Header.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stories/Page.stories.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stories/Page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stories/assets/accessibility.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stories/assets/accessibility.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stories/assets/addon-library.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stories/assets/assets.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stories/assets/avif-test-image.avif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stories/assets/context.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stories/assets/discord.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stories/assets/docs.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stories/assets/figma-plugin.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stories/assets/github.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stories/assets/share.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stories/assets/styling.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stories/assets/testing.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stories/assets/theming.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stories/assets/tutorials.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stories/assets/youtube.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stories/button.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stories/header.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stories/page.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_task.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -135,6 +112,15 @@
       <workItem from="1765316742919" duration="330000" />
       <workItem from="1765317078258" duration="4393000" />
     </task>
+    <task id="LOCAL-00001" summary="minor: Доработки компонента &quot;Отрезок&quot;&#10;- Добавлен prettier&#10;- Добавлена базовая a11y&#10;- Изменена логика введения процентов (более масштабируема)">
+      <option name="closed" value="true" />
+      <created>1765325089100</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1765325089100</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -150,5 +136,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="minor: Доработки компонента &quot;Отрезок&quot;&#10;- Добавлен prettier&#10;- Добавлена базовая a11y&#10;- Изменена логика введения процентов (более масштабируема)" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor: Доработки компонента &quot;Отрезок&quot;&#10;- Добавлен prettier&#10;- Добавлена базовая a11y&#10;- Изменена логика введения процентов (более масштабируема)" />
   </component>
 </project>
