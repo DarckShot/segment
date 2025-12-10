@@ -1,6 +1,6 @@
 # Contributing to Segment Component
 
-Спасибо за интерес к улучшению компонента Segment! 
+Спасибо за интерес к улучшению компонента Segment!
 
 ## Оглавление
 

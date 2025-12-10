@@ -1,3 +1,5 @@
+import type { MouseEvent, FocusEvent, KeyboardEvent } from "react";
+
 export interface SegmentProps {
   /**
    * Длина отрезка в условных единицах (px)
@@ -37,6 +39,38 @@ export interface SegmentProps {
    * Текстовое представление текущего значения
    */
   ariaValueText?: string;
+  /**
+   * Обработчик клика по компоненту
+   */
+  onClick?: (event: MouseEvent<HTMLDivElement>) => void;
+  /**
+   * Обработчик двойного клика
+   */
+  onDoubleClick?: (event: MouseEvent<HTMLDivElement>) => void;
+  /**
+   * Обработчик получения фокуса
+   */
+  onFocus?: (event: FocusEvent<HTMLDivElement>) => void;
+  /**
+   * Обработчик потери фокуса
+   */
+  onBlur?: (event: FocusEvent<HTMLDivElement>) => void;
+  /**
+   * Обработчик нажатия клавиши
+   */
+  onKeyDown?: (event: KeyboardEvent<HTMLDivElement>) => void;
+  /**
+   * Обработчик отпускания клавиши
+   */
+  onKeyUp?: (event: KeyboardEvent<HTMLDivElement>) => void;
+  /**
+   * Обработчик наведения мыши
+   */
+  onMouseEnter?: (event: MouseEvent<HTMLDivElement>) => void;
+  /**
+   * Обработчик ухода мыши
+   */
+  onMouseLeave?: (event: MouseEvent<HTMLDivElement>) => void;
 }
 
 export interface Layer {

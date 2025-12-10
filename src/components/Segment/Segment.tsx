@@ -14,6 +14,14 @@ const Segment = memo<SegmentProps>(
     ariaValueMin = 0,
     ariaValueMax = 100,
     ariaValueText,
+    onClick,
+    onDoubleClick,
+    onFocus,
+    onBlur,
+    onKeyDown,
+    onKeyUp,
+    onMouseEnter,
+    onMouseLeave,
   }) => {
     const layers = useSegmentLayers(percentages);
 
@@ -40,6 +48,14 @@ const Segment = memo<SegmentProps>(
         aria-valuemax={aria.valueMax}
         aria-valuetext={aria.valueText}
         tabIndex={0}
+        onClick={onClick}
+        onDoubleClick={onDoubleClick}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onKeyDown={onKeyDown}
+        onKeyUp={onKeyUp}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
       >
         {layers.map((layer, index) => (
           <div
