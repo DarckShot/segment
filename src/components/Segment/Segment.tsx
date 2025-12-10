@@ -6,7 +6,7 @@ import type { SegmentProps } from "./types";
 const Segment = memo<SegmentProps>(
   ({
     length,
-    percentages,
+    fill,
     height = 24,
     className = "",
     ariaLabel,
@@ -23,10 +23,10 @@ const Segment = memo<SegmentProps>(
     onMouseEnter,
     onMouseLeave,
   }) => {
-    const layers = useSegmentLayers(percentages);
+    const layers = useSegmentLayers(fill);
 
     const aria = useAriaAttributes({
-      percentages,
+      fill,
       ariaLabel,
       ariaValueNow,
       ariaValueMin,

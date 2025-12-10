@@ -1,16 +1,25 @@
 import type { MouseEvent, FocusEvent, KeyboardEvent } from "react";
 
+/**
+ * Тип статуса заливки сегмента
+ */
+export type SegmentStatus = "solid" | "striped" | string;
+
+/**
+ * Заливка отрезка: набор "статус: % от длины отрезка"
+ */
+export type SegmentFill = Record<SegmentStatus, number>;
+
 export interface SegmentProps {
   /**
    * Длина отрезка в условных единицах (px)
    */
   length: number;
   /**
-   * Массив процентов заливки (от 1 до n значений)
-   * percentages[0] - основная заливка (solid)
-   * percentages[1] - вторичная заливка (striped)
+   * Заливка отрезка: набор "статус: % от длины отрезка"
+   * Пример: { solid: 70, striped: 50 }
    */
-  percentages: number[];
+  fill: SegmentFill;
   /**
    * Высота отрезка в px
    */

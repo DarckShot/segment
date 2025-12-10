@@ -1,9 +1,9 @@
 import { useMemo } from "react";
 import { getMaxPercentage } from "../utils";
-import type { AriaAttributes } from "../types";
+import type { AriaAttributes, SegmentFill } from "../types";
 
 interface UseAriaAttributesParams {
-  percentages: number[];
+  fill: SegmentFill;
   ariaLabel?: string;
   ariaValueNow?: number;
   ariaValueMin?: number;
@@ -15,7 +15,7 @@ interface UseAriaAttributesParams {
  * Хук для генерации ARIA атрибутов
  */
 export const useAriaAttributes = ({
-  percentages,
+  fill,
   ariaLabel,
   ariaValueNow,
   ariaValueMin = 0,
@@ -23,7 +23,7 @@ export const useAriaAttributes = ({
   ariaValueText,
 }: UseAriaAttributesParams): AriaAttributes => {
   return useMemo(() => {
-    const maxPercentage = getMaxPercentage(percentages);
+    const maxPercentage = getMaxPercentage(fill);
     const currentValue = ariaValueNow ?? maxPercentage;
 
     const label = ariaLabel || `Сегмент прогресса: ${currentValue}%`;
@@ -37,7 +37,7 @@ export const useAriaAttributes = ({
       valueText,
     };
   }, [
-    percentages,
+    fill,
     ariaLabel,
     ariaValueNow,
     ariaValueMin,

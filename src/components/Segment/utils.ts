@@ -1,6 +1,4 @@
-import type { Layer } from "./types";
-
-export const FILL_TYPES = ["solid", "striped"] as const;
+import type { Layer, SegmentFill } from "./types";
 
 /**
  * Ограничивает значение в диапазоне 0-100
@@ -10,13 +8,13 @@ export const clampPercentage = (value: number): number => {
 };
 
 /**
- * Создает слои заливки из массива процентов
+ * Создает слои заливки из объекта "статус: % от длины отрезка"
  */
-export const createLayers = (percentages: number[]): Layer[] => {
-  const layers: Layer[] = percentages
-    .map((percentage, index) => ({
+export const createLayers = (fill: SegmentFill): Layer[] => {
+  const layers: Layer[] = Object.entries(fill)
+    .map(([status, percentage]) => ({
       percentage: clampPercentage(percentage),
-      type: FILL_TYPES[index] || "solid",
+      type: status,
       zIndex: 0,
     }))
     .filter((layer) => layer.percentage > 0);
@@ -31,8 +29,8 @@ export const createLayers = (percentages: number[]): Layer[] => {
 };
 
 /**
- * Вычисляет максимальный процент из массива
+ * Вычисляет максимальный процент из объекта заливки
  */
-export const getMaxPercentage = (percentages: number[]): number => {
-  return Math.max(...percentages, 0);
+export const getMaxPercentage = (fill: SegmentFill): number => {
+  return Math.max(...Object.values(fill), 0);
 };

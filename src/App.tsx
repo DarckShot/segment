@@ -25,7 +25,7 @@ function App() {
         <Segment
           length={140}
           height={24}
-          percentages={[0]}
+          fill={{}}
           ariaLabel="Задача не начата"
         />
       </div>
@@ -35,7 +35,7 @@ function App() {
         <Segment
           length={200}
           height={24}
-          percentages={[65]}
+          fill={{ solid: 65 }}
           ariaLabel="Прогресс выполнения задачи"
           ariaValueText="65% выполнено"
         />
@@ -46,7 +46,7 @@ function App() {
         <Segment
           length={140}
           height={24}
-          percentages={[65, 100]}
+          fill={{ solid: 65, striped: 100 }}
           ariaLabel="Прогресс основной и дополнительной задачи"
           ariaValueText="Основная: 65%, Дополнительная: 100%"
         />
@@ -57,7 +57,7 @@ function App() {
         <Segment
           length={340}
           height={24}
-          percentages={[100]}
+          fill={{ solid: 100 }}
           ariaLabel="Задача выполнена"
           ariaValueText="Выполнено полностью"
         />
@@ -68,7 +68,7 @@ function App() {
         <Segment
           length={300}
           height={24}
-          percentages={[45, 80]}
+          fill={{ solid: 45, striped: 80 }}
           ariaLabel="Загрузка файла"
           ariaValueNow={45}
           ariaValueMin={0}
