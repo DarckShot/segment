@@ -1,7 +1,4 @@
-import React from 'react';
-import './Segment.scss';
-
-export type FillType = 'solid' | 'striped';
+import "./Segment.scss";
 
 export interface SegmentProps {
   /**
@@ -9,14 +6,11 @@ export interface SegmentProps {
    */
   length: number;
   /**
-   * Основная заливка (сплошная) - процент от общей длины (0-100)
+   * Массив процентов заливки (от 1 до n значений)
+   * percentages[0] - основная заливка (solid)
+   * percentages[1] - вторичная заливка (striped)
    */
-  primary: number;
-  /**
-   * Вторичная заливка (штриховка) - процент от общей длины (0-100)
-   * Независима от primary и отображается как фоновый слой
-   */
-  secondary?: number;
+  percentages: number[];
   /**
    * Высота отрезка в px
    */
@@ -25,33 +19,73 @@ export interface SegmentProps {
    * CSS класс для дополнительной стилизации
    */
   className?: string;
+  /**
+   * Текстовое описание для скринридеров
+   */
+  ariaLabel?: string;
+  /**
+   * Текущее значение для прогресс-бара (если используется как индикатор прогресса)
+   */
+  ariaValueNow?: number;
+  /**
+   * Минимальное значение для прогресс-бара
+   */
+  ariaValueMin?: number;
+  /**
+   * Максимальное значение для прогресс-бара
+   */
+  ariaValueMax?: number;
+  /**
+   * Текстовое представление текущего значения
+   */
+  ariaValueText?: string;
 }
 
-const Segment: React.FC<SegmentProps> = ({
+interface Layer {
+  percentage: number;
+  type: string;
+  zIndex: number;
+}
+
+const Segment = ({
   length,
-  primary,
-  secondary = 0,
+  percentages,
   height = 24,
-  className = '',
-}) => {
-  // Автоматическое определение типа заливки
-  const determineFillType = (): FillType => {
-    // Логика автоопределения:
-    // Если вторичная заливка больше основной - основная сплошная
-    // Если основная заливка >= 100% - сплошная
-    if (primary >= 100 || secondary > primary) {
-      return 'solid';
-    }
+  className = "",
+  ariaLabel,
+  ariaValueNow,
+  ariaValueMin = 0,
+  ariaValueMax = 100,
+  ariaValueText,
+}: SegmentProps) => {
+  const fillTypes = ["solid", "striped"];
 
-    // По умолчанию - сплошная
-    return 'solid';
-  };
+  const layers: Layer[] = percentages
+    .map((percentage, index) => {
+      const clampedPercentage = Math.min(Math.max(percentage, 0), 100);
+      return {
+        percentage: clampedPercentage,
+        type: fillTypes[index],
+        zIndex: 0,
+      };
+    })
+    .filter((layer) => layer.percentage > 0);
 
-  const actualFillType = determineFillType();
+  layers.sort((a, b) => b.percentage - a.percentage);
 
-  // Ограничиваем проценты диапазоном 0-100
-  const clampedPrimary = Math.min(Math.max(primary, 0), 100);
-  const clampedSecondary = Math.min(Math.max(secondary, 0), 100);
+  layers.forEach((layer, index) => {
+    layer.zIndex = index + 1;
+  });
+
+  // Определяем максимальный процент для aria-valuenow если не передан явно
+  const maxPercentage = Math.max(...percentages, 0);
+  const currentValue =
+    ariaValueNow !== undefined ? ariaValueNow : maxPercentage;
+
+  // Генерируем описание по умолчанию
+  const defaultLabel = ariaLabel || `Сегмент прогресса: ${currentValue}%`;
+  const defaultValueText =
+    ariaValueText || `${currentValue} из ${ariaValueMax}`;
 
   return (
     <div
@@ -60,26 +94,25 @@ const Segment: React.FC<SegmentProps> = ({
         width: `${length}px`,
         height: `${height}px`,
       }}
+      role="progressbar"
+      aria-label={defaultLabel}
+      aria-valuenow={currentValue}
+      aria-valuemin={ariaValueMin}
+      aria-valuemax={ariaValueMax}
+      aria-valuetext={defaultValueText}
+      tabIndex={0}
     >
-      {/* Вторичная заливка (штриховка) - фоновый слой */}
-      {clampedSecondary > 0 && (
+      {layers.map((layer, index) => (
         <div
-          className="segment__background segment__background--striped"
+          key={`${layer.type}-${index}`}
+          className={`segment__layer segment__layer--${layer.type}`}
           style={{
-            width: `${clampedSecondary}%`,
+            width: `${layer.percentage}%`,
+            zIndex: layer.zIndex,
           }}
+          aria-hidden="true"
         />
-      )}
-
-      {/* Основная заливка - передний слой */}
-      {clampedPrimary > 0 && (
-        <div
-          className={`segment__fill segment__fill--${actualFillType}`}
-          style={{
-            width: `${clampedPrimary}%`,
-          }}
-        />
-      )}
+      ))}
     </div>
   );
 };

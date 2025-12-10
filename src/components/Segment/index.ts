@@ -1,2 +1,2 @@
-export { default } from './Segment';
-export type { SegmentProps, FillType } from './Segment';
+export { default } from "./Segment";
+export type { SegmentProps } from "./Segment";

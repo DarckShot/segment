@@ -1,29 +1,44 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import Segment from './Segment';
+import type { Meta, StoryObj } from "@storybook/react";
+import Segment from "./Segment";
 
 const meta = {
-  title: 'Components/Segment',
+  title: "Components/Segment",
   component: Segment,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     length: {
-      control: { type: 'range', min: 50, max: 500, step: 10 },
-      description: 'Длина отрезка в условных единицах (px)',
+      control: { type: "range", min: 50, max: 500, step: 10 },
+      description: "Длина отрезка в условных единицах (px)",
     },
     height: {
-      control: { type: 'range', min: 16, max: 48, step: 4 },
-      description: 'Высота отрезка в px',
+      control: { type: "range", min: 16, max: 48, step: 4 },
+      description: "Высота отрезка в px",
     },
-    primary: {
-      control: { type: 'range', min: 0, max: 100, step: 5 },
-      description: 'Основная заливка (сплошная) в процентах',
+    percentages: {
+      description: "Массив процентов заливки",
     },
-    secondary: {
-      control: { type: 'range', min: 0, max: 100, step: 5 },
-      description: 'Вторичная заливка (штриховка) в процентах',
+    ariaLabel: {
+      control: "text",
+      description: "Текстовое описание для скринридеров",
+    },
+    ariaValueNow: {
+      control: { type: "number", min: 0, max: 100 },
+      description: "Текущее значение прогресса",
+    },
+    ariaValueMin: {
+      control: { type: "number", min: 0, max: 100 },
+      description: "Минимальное значение",
+    },
+    ariaValueMax: {
+      control: { type: "number", min: 0, max: 100 },
+      description: "Максимальное значение",
+    },
+    ariaValueText: {
+      control: "text",
+      description: "Текстовое представление значения",
     },
   },
 } satisfies Meta<typeof Segment>;
@@ -36,88 +51,75 @@ export const Empty: Story = {
   args: {
     length: 140,
     height: 24,
-    primary: 0,
-    secondary: 0,
+    percentages: [0],
+    ariaLabel: "Задача не начата",
   },
 };
 
-// Вариант 2: Штриховка 100% + сплошная 65% поверх
-export const StripedBackgroundWithSolid: Story = {
-  args: {
-    length: 140,
-    height: 24,
-    primary: 65,
-    secondary: 100,
-  },
-};
-
-// Вариант 3: Полная заливка сплошная (100%)
-export const FullSolid: Story = {
-  args: {
-    length: 340,
-    height: 24,
-    primary: 100,
-    secondary: 0,
-  },
-};
-
-// Штриховка 100%, основная 30%
-export const StripedFullWithPartialSolid: Story = {
-  args: {
-    length: 340,
-    height: 24,
-    primary: 30,
-    secondary: 100,
-  },
-};
-
-// Только основная заливка 40%
+// Вариант 2: Только основная заливка (solid)
 export const OnlyPrimary: Story = {
   args: {
     length: 200,
     height: 24,
-    primary: 40,
-    secondary: 0,
+    percentages: [65],
+    ariaLabel: "Прогресс выполнения задачи",
+    ariaValueText: "65% выполнено",
   },
 };
 
-// Только штриховка 60%
-export const OnlySecondary: Story = {
+// Вариант 3: Штриховка 100% + сплошная 65% поверх
+export const PrimaryAndSecondary: Story = {
   args: {
-    length: 200,
+    length: 140,
     height: 24,
-    primary: 0,
-    secondary: 60,
+    percentages: [65, 100],
+    ariaLabel: "Прогресс основной и дополнительной задачи",
+    ariaValueText: "Основная задача: 65%, Дополнительная: 100%",
   },
 };
 
-// Штриховка 50%, основная 80%
-export const OverlappingFills: Story = {
+// Вариант 4: Полная заливка сплошная (100%)
+export const FullSolid: Story = {
+  args: {
+    length: 340,
+    height: 24,
+    percentages: [100],
+    ariaLabel: "Задача выполнена",
+    ariaValueText: "Выполнено полностью",
+  },
+};
+
+// Вариант 5: Штриховка 100%, основная 30%
+export const StripedFullWithPartialSolid: Story = {
+  args: {
+    length: 340,
+    height: 24,
+    percentages: [30, 100],
+    ariaLabel: "Многоуровневый прогресс",
+  },
+};
+
+// Два сегмента с кастомными aria атрибутами
+export const WithCustomAria: Story = {
   args: {
     length: 300,
     height: 24,
-    primary: 80,
-    secondary: 50,
+    percentages: [45, 80],
+    ariaLabel: "Загрузка файла",
+    ariaValueNow: 45,
+    ariaValueMin: 0,
+    ariaValueMax: 100,
+    ariaValueText: "45 из 100 мегабайт загружено",
   },
 };
 
-// С явным указанием типа заливки
-export const WithExplicitFillType: Story = {
-  args: {
-    length: 200,
-    height: 24,
-    primary: 70,
-    secondary: 100,
-  },
-};
-
-// Маленький отрезок
+// Маленький отрезок с двумя заливками
 export const Small: Story = {
   args: {
     length: 80,
     height: 16,
-    primary: 50,
-    secondary: 80,
+    percentages: [50, 80],
+    ariaLabel: "Компактный индикатор",
   },
 };
 
@@ -126,7 +128,8 @@ export const Large: Story = {
   args: {
     length: 500,
     height: 32,
-    primary: 75,
-    secondary: 100,
+    percentages: [60, 100],
+    ariaLabel: "Прогресс установки",
+    ariaValueText: "60% установлено",
   },
 };
