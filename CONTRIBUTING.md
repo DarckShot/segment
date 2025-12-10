@@ -36,16 +36,33 @@ npm run dev
 ```
 src/components/Segment/
 ├── Segment.tsx              # Основной компонент
-├── types.ts                 # TypeScript типы
+├── types.ts                 # TypeScript типы и интерфейсы
 ├── utils.ts                 # Утилитные функции
-├── Segment.scss             # Стили
-├── Segment.stories.ts       # Storybook истории
-├── index.ts                 # Экспорты
+├── Segment.scss             # Стили компонента
+├── Segment.stories.tsx      # Storybook истории
+├── index.ts                 # Публичные экспорты
 └── hooks/
     ├── index.ts
-    ├── useSegmentLayers.ts  # Хук для обработки слоев
-    └── useAriaAttributes.ts # Хук для ARIA атрибутов
+    ├── useSegmentLayers.ts  # Хук для создания слоев из fill объекта
+    └── useAriaAttributes.ts # Хук для генерации ARIA атрибутов
 ```
+
+### Ключевые файлы
+
+**Segment.tsx** - основной компонент с мемоизацией и обработкой событий
+
+**types.ts** - типы данных:
+- `SegmentFill` - объект "статус: процент"
+- `SegmentProps` - пропсы компонента
+- `Layer` - структура слоя заливки
+- `AriaAttributes` - ARIA атрибуты
+
+**utils.ts** - утилитные функции:
+- `clampPercentage()` - ограничение значений 0-100
+- `createLayers()` - создание слоев из fill объекта
+- `getMaxPercentage()` - поиск максимального процента
+
+**hooks/** - кастомные React хуки для разделения логики
 
 ## Разработка
 
@@ -62,6 +79,13 @@ npm run storybook
 ```
 
 Откроется на `http://localhost:6006`
+
+Storybook содержит множество примеров использования компонента:
+- Базовые примеры (solid, striped)
+- Различные размеры (small, large)
+- Множественные слои
+- Интерактивные примеры с событиями
+- Варианты прогресса
 
 ### Линтинг
 
@@ -85,48 +109,76 @@ npm run format
 
 - Используйте строгую типизацию
 - Все публичные API должны иметь типы
-- Добавляйте JSDoc комментарии к типам
+- Добавляйте JSDoc комментарии к типам и функциям
 
 ```tsx
 /**
- * Пропсы компонента Segment
+ * Тип статуса заливки сегмента
  */
-export interface SegmentProps {
-  /** Длина отрезка в пикселях */
-  length: number;
-  // ...
-}
+export type SegmentStatus = "solid" | "striped" | string;
+
+/**
+ * Заливка отрезка: набор "статус: % от длины отрезка"
+ */
+export type SegmentFill = Record<SegmentStatus, number>;
 ```
 
 ### React
 
 - Используйте функциональные компоненты
-- Применяйте `memo()` для оптимизации
+- Применяйте `memo()` для оптимизации производительности
 - Выносите логику в кастомные хуки
 - Используйте `useMemo` и `useCallback` там, где необходимо
 
 ```tsx
 const Component = memo<Props>(({ prop }) => {
-  const value = useMemo(() => compute(prop), [prop]);
-  return <div>{value}</div>;
+  const layers = useSegmentLayers(fill);
+  const aria = useAriaAttributes({ fill, ariaLabel });
+  
+  return <div>{/* content */}</div>;
 });
 
 Component.displayName = "Component";
+```
+
+### Кастомные хуки
+
+Хуки должны:
+- Начинаться с префикса `use`
+- Принимать параметры через объект для гибкости
+- Возвращать мемоизированные значения
+- Иметь четкие зависимости в `useMemo`/`useCallback`
+
+```tsx
+export const useSegmentLayers = (fill: SegmentFill): Layer[] => {
+  return useMemo(() => createLayers(fill), [fill]);
+};
 ```
 
 ### Стили
 
 - Используйте BEM методологию
 - SCSS препроцессор
-- Модульность и переиспользование
+- Модификаторы для вариантов стилей
 
 ```scss
 .segment {
+  // базовые стили
+  
   &__layer {
+    // стили слоя
+    
     &--solid {
+      // вариант solid
     }
+    
     &--striped {
+      // вариант striped
     }
+  }
+  
+  &--empty {
+    // модификатор для пустого сегмента
   }
 }
 ```
@@ -134,44 +186,51 @@ Component.displayName = "Component";
 ### Именование
 
 - **Компоненты:** PascalCase (`Segment`)
-- **Хуки:** camelCase с префиксом `use` (`useSegmentLayers`)
-- **Утилиты:** camelCase (`clampPercentage`)
-- **Типы:** PascalCase (`SegmentProps`)
-- **Константы:** UPPER_SNAKE_CASE (`FILL_TYPES`)
+- **Хуки:** camelCase с префиксом `use` (`useSegmentLayers`, `useAriaAttributes`)
+- **Утилиты:** camelCase (`clampPercentage`, `createLayers`)
+- **Типы:** PascalCase (`SegmentProps`, `SegmentFill`, `Layer`)
+- **Константы:** UPPER_SNAKE_CASE (если используются)
 
-## Тестирование
+### Утилитные функции
 
-### Запуск тестов
-
-```bash
-npm test
-```
-
-### Покрытие
-
-```bash
-npm run test:coverage
-```
-
-### Что тестировать
-
-- Утилитные функции
-- Кастомные хуки
-- Рендеринг компонента
-- Доступность (a11y)
-- Крайние случаи
-
-Пример:
+Утилиты должны быть:
+- Чистыми функциями (без побочных эффектов)
+- Хорошо протестированными
+- Документированными с JSDoc
 
 ```tsx
-describe("clampPercentage", () => {
-  it("should clamp value between 0 and 100", () => {
-    expect(clampPercentage(-10)).toBe(0);
-    expect(clampPercentage(150)).toBe(100);
-    expect(clampPercentage(50)).toBe(50);
-  });
-});
+/**
+ * Ограничивает значение в диапазоне 0-100
+ */
+export const clampPercentage = (value: number): number => {
+  return Math.min(Math.max(value, 0), 100);
+};
 ```
+
+## Добавление новых статусов заливки
+
+Для добавления нового статуса заливки:
+
+1. Добавьте CSS класс в `Segment.scss`:
+
+```scss
+.segment__layer--new-status {
+  background-color: #your-color;
+  // дополнительные стили
+}
+```
+
+2. Используйте в компоненте:
+
+```tsx
+<Segment
+  length={400}
+  height={24}
+  fill={{ solid: 80, "new-status": 60 }}
+/>
+```
+
+3. Добавьте story в `Segment.stories.tsx` для демонстрации
 
 ## Pull Requests
 
@@ -184,73 +243,47 @@ describe("clampPercentage", () => {
    ```
 
 2. Внесите изменения
-3. Добавьте тесты
-4. Запустите линтер и тесты
+3. Добавьте/обновите тесты
+4. Добавьте/обновите Storybook истории если необходимо
+5. Запустите линтер, форматтер и тесты
 
    ```bash
    npm run lint
    npm run format
-   npm test
    ```
 
-5. Зафиксируйте изменения
+6. Зафиксируйте изменения с понятным сообщением
 
    ```bash
    git commit -m "feat: add new feature"
    ```
 
-6. Отправьте в репозиторий
+7. Отправьте изменения и создайте PR
 
-   ```bash
-   git push origin feature/my-feature
-   ```
+### Сообщения коммитов
 
-7. Создайте Pull Request
-
-### Commit сообщения
-
-Используйте Conventional Commits:
+Используйте [Conventional Commits](https://www.conventionalcommits.org/):
 
 - `feat:` - новая функциональность
 - `minor:` - не значительные изменения
 - `fix:` - исправление бага
-- `docs:` - изменения документации
+- `docs:` - изменения в документации
 - `style:` - форматирование кода
-- `refactor:` - рефакторинг
+- `refactor:` - рефакторинг без изменения функциональности
 - `test:` - добавление тестов
 - `chore:` - обновление зависимостей и т.д.
 
-Примеры:
+### Чеклист для PR
 
-```
-feat: add striped layer support
-fix: correct aria-label generation
-docs: update README with new props
-refactor: extract layers logic to hook
-```
-
-### Чеклист PR
-
-- [ ] Код проходит линтер
-- [ ] Код отформатирован Prettier
-- [ ] Добавлены тесты
-- [ ] Тесты проходят
-- [ ] Обновлена документация
-- [ ] Storybook истории обновлены
+- [ ] Код проходит линтинг (`npm run lint`)
+- [ ] Код отформатирован (`npm run format`)
+- [ ] Добавлены/обновлены тесты
+- [ ] Добавлена/обновлена документация
+- [ ] Добавлены Storybook примеры для новой функциональности
 - [ ] Проверена доступность (a11y)
 
-## Доступность
+## Вопросы?
 
-Все изменения должны соответствовать WCAG 2.1 Level AA:
+Если у вас есть вопросы или нужна помощь, создайте issue в репозитории.
 
-- Используйте семантический HTML
-- Добавляйте ARIA атрибуты где необходимо
-- Обеспечьте навигацию с клавиатуры
-- Проверяйте контрастность цветов
-- Тестируйте со скринридерами
-
-## Поддержка
-
-Есть вопросы? Создайте Issue в репозитории.
-
-Спасибо за ваш вклад!
+Спасибо за вклад! 
